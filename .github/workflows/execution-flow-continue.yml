@@ -1,4 +1,4 @@
-name: Execution flow Test Action
+name: Execution flow Continue-on-Error Test Action
 on:
   push:
     branches:
