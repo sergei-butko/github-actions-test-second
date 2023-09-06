@@ -1,5 +1,6 @@
 name: Execution flow Matrix Test Action
-on: push
+# on: [workflow_dispatch, push]
+on: workflow_dispatch
 jobs:
   build:
     continue-on-error: true
