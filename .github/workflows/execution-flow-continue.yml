@@ -1,9 +1,8 @@
 name: Execution flow Test Action
 on:
-  workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -39,11 +38,11 @@ jobs:
         working-directory: ./01-execution-flow
         run: npm ci
       - name: Test code
+        continue-on-error: true
         working-directory: ./01-execution-flow  
         id: run-tests
         run: npm run test
       - name: Upload test report
-        if: failure() && steps.run-tests.outcome == 'failure'
         uses: actions/upload-artifact@v3
         with:
           name: test-report
