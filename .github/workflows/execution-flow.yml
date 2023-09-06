@@ -1,4 +1,4 @@
-name: Website Deployment
+name: Execution flow Test Action
 on:
   push:
     branches:
@@ -16,8 +16,10 @@ jobs:
           path: ~/.npm
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        working-directory: ./01-execution-flow
         run: npm ci
       - name: Lint code
+        working-directory: ./01-execution-flow
         run: npm run lint
   test:
     runs-on: ubuntu-latest
@@ -31,8 +33,10 @@ jobs:
           path: ~/.npm
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        working-directory: ./01-execution-flow
         run: npm ci
       - name: Test code
+        working-directory: ./01-execution-flow  
         id: run-tests
         run: npm run test
       - name: Upload test report
@@ -54,9 +58,11 @@ jobs:
           path: ~/.npm
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        working-directory: ./01-execution-flow
         run: npm ci
       - name: Build website
         id: build-website
+        working-directory: ./01-execution-flow
         run: npm run build
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
